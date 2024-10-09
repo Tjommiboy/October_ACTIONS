@@ -19,11 +19,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-
+  # Single deploy job since we're just deploying
   deploy:
     environment:
       name: github-pages
-   url: ${{ steps.deployment.outputs.page_url }}
+    url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -33,7 +33,7 @@ jobs:
       - name: Replace placeholders with our secret variables
         uses: falnyr/replace-env-vars-action@v1.3.2
         env:
-          MEANING_OF_LIFE: ${{secrets.MEANING_OF_LIFE}}
+          MEANING_OF_LIFE:${{secrets.MEANING_OF_LIFE}}
         with:
           filename: index.html
       - name: Setup Pages
